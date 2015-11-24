@@ -48,21 +48,22 @@ void draw() {
   endShape();
 
   beginShape();
-  strokeWeight(3);
-  stroke(#0518E3);
-  vertex(100, 50);
-  vertex(100, 150);
+  vertex(333, 150);
+  vertex(45, 150);
+  vertex(45, 45);
+  vertex(333, 45);
+  vertex(333, 150);
   endShape();
 
-  // draw the lines
-  //stroke(200);
-  //fill(255);
-  //beginShape(LINES);
-  //vertex(0, 300);
-  //vertex(900, 300);
-  //vertex(0, 150);
-  //vertex(900, 150);
+  // draw the border
+  //beginShape();
+  //vertex(5, 5);
+  //vertex(995, 5);
+  //vertex(995, 595);
+  //vertex(5, 595);
+  //vertex(5, 5);
   //endShape();
+
 
   x = x +s; // speed of pacman x
   y = y +b; // speed of pacman y
@@ -77,6 +78,28 @@ void draw() {
   }
   if ( y > 600) { // set y position to bottom of screen
     y = 0;
+  }
+
+  // hit detection
+
+  // middle rectangle
+
+  // stop the pacman if it hits the left edge
+  if (x > 280 && y < 370 && y > 180 && d == 1) {
+    x = x - s; // pushes back out of boundry
+    y = y - b; // pushes back out of boundry 
+    s = 0;
+    b = 0;
+  } else if (x > 280 && y > 180 && x < 720 && d == 4) { // top edge
+    x = x - s;
+    y = y - b;
+    s = 0;
+    b = 0;
+  } else if (x < 720 && y < 370 && y > 180 && d == 2) {
+    x = x + s;
+    y = y + b;
+    b = 0;
+    s = 0;
   }
 }
 
