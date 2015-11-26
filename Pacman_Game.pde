@@ -36,6 +36,8 @@ void draw() {
   }
 
   // draw the map
+
+  // middle rect
   noFill();
   strokeWeight(3);
   stroke(#0518E3);
@@ -44,9 +46,11 @@ void draw() {
   vertex(700, 200);
   vertex(700, 350);
   vertex(300, 350);
-  vertex(300, 200);
+  vertex(300, 200); 
   endShape();
 
+
+  // top left rect
   beginShape();
   vertex(333, 150);
   vertex(45, 150);
@@ -84,22 +88,56 @@ void draw() {
 
   // middle rectangle
 
-  // stop the pacman if it hits the left edge
-  if (x > 280 && y < 370 && y > 180 && d == 1) {
+  // stop the pacman if it hits edges
+  if (x > 285 && y < 370 && y > 185 && d == 1) { //left edge
     x = x - s; // pushes back out of boundry
     y = y - b; // pushes back out of boundry 
     s = 0;
     b = 0;
+    println(" left edge moving right");
   } else if (x > 280 && y > 180 && x < 720 && d == 4) { // top edge
     x = x - s;
     y = y - b;
     s = 0;
     b = 0;
-  } else if (x < 720 && y < 370 && y > 180 && d == 2) {
-    x = x + s;
-    y = y + b;
-    b = 0;
+    println(" top edge moving down");
+  } else if ( x < 720 && y < 370 && y > 185 && d == 2) { // right edge
+    x = x - s;
+    y = y - b;
     s = 0;
+    b = 0;
+    println(" right edge moving left ");
+  } else if ( x > 285 && y < 370 && x < 720 && d == 3 ) { // bottom edge
+    x = x - s;
+    y = y - b;
+    s = 0;
+    b = 0;
+    println(" bottom edge moving up ");
+  }
+
+
+  // top left rectangle
+
+  if ( x < 320 && y < 150 && y > 30 && d == 1) { // left edge
+    x = x - s;
+    y = y - b;
+    s = 0;
+    b = 0;
+  } else if ( x > 318 && y > 135 && x < 30 && d == 4) { // top edge
+    x = x - s;
+    y = y - b;
+    s = 0;
+    b = 0;
+  } else  if ( x < 353 && y < 150 && y > 30 && d == 2) { // right edge
+    x = x - s;
+    y = y - b;
+    s = 0;
+    b = 0;
+  } else if ( x > 318 && y < 170 && x < 30 && d == 3) { // bottom edge
+    x = x - s;
+    y = y - b;
+    s = 0;
+    b = 0;
   }
 }
 
