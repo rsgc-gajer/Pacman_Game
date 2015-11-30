@@ -6,7 +6,7 @@ int s; // speed of x value
 int y; // tracks vertical position of pacman
 int b; // speed of y value
 int d = 1; // direction : 1 = right, 2 = left, 3 = up, 4 = down
-final int D_RIGHT = 1;
+final int D_RIGHT = 1; 
 final int D_LEFT = 2;
 final int D_UP = 3;
 final int D_DOWN = 4;
@@ -97,14 +97,14 @@ void draw() {
   vertex(667, 400);
   endShape();
 
-  // draw the border
-  //beginShape();
-  //vertex(5, 5);
-  //vertex(995, 5);
-  //vertex(995, 595);
-  //vertex(5, 595);
-  //vertex(5, 5);
-  //endShape();
+  //draw the border
+  beginShape();
+  vertex(5, 5);
+  vertex(995, 5);
+  vertex(995, 595);
+  vertex(5, 595);
+  vertex(5, 5);
+  endShape();
 
   // draw the ghosts
 
@@ -143,7 +143,7 @@ void draw() {
     y = 0;
   }
 
-  // hit detection
+  // hit detection 
 
   // middle rectangle
 
@@ -156,27 +156,36 @@ void draw() {
     println("x is: " + x);
     println("y is: " + y);
     println(" left edge moving right");
+    println("direction is: " + d);
+  } else if ( x < 720 && x > 285 && y < 370 && y > 185 && d == D_LEFT) { // right edge
+    x = x - s;
+    y = y - b;
+    s = 0;
+    b = 0;
+    println("x is: " + x);
+    println("y is: " + y);
+    println(" right edge moving left ");
+    println("direction is: " + d);
   } else if (x > 285 && y > 185 && x < 720 && d == D_DOWN) { // top edge
     x = x - s;
     y = y - b;
     s = 0;
     b = 0;
+    println("x is: " + x);
+    println("y is: " + y);
     println(" top edge moving down");
-  } else if ( x < 720 && y < 370 && y > 185 && d == D_LEFT) { // right edge
-    x = x + s;
-    y = y + b;
+    println("direction is: " + d);
+  } else if ( x > 285 && y < 370 && x < 720 && d == D_UP ) { // bottom edge
+    x = x - s;
+    y = y - b;
     s = 0;
     b = 0;
-    println(" right edge moving left ");
+    println(" bottom edge moving up ");
+    println("x is: " + x);
+    println("y is: " + y);
+    println("direction is: " + d);
   }
 }
-//} else if ( x > 285 && y < 370 && x < 720 && d == 3 ) { // bottom edge
-//  x = x - s;
-//  y = y - b;
-//  s = 0;
-//  b = 0;
-//  println(" bottom edge moving up ");
-//}
 
 
 // top left rectangle
