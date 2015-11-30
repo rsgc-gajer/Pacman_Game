@@ -6,6 +6,10 @@ int s; // speed of x value
 int y; // tracks vertical position of pacman
 int b; // speed of y value
 int d = 1; // direction : 1 = right, 2 = left, 3 = up, 4 = down
+final int D_RIGHT = 1;
+final int D_LEFT = 2;
+final int D_UP = 3;
+final int D_DOWN = 4;
 PImage red_ghost; // red ghost
 PImage aqua_ghost; // aqua ghost
 PImage orange_ghost; // orange ghost
@@ -32,13 +36,13 @@ void draw() {
   background(0);
 
   // change the way the mouth faces
-  if ( d == 4) {
+  if ( d == D_DOWN) {
     arc(x, y, 30, 30, PI/2+mouthAngle, PI/2+TWO_PI-mouthAngle); // DOWN
-  } else if ( d == 3) {
+  } else if ( d == D_UP) {
     arc(x, y, 30, 30, PI*3/2+mouthAngle, PI*3/2+TWO_PI-mouthAngle); //UP
-  } else if ( d == 2) {
+  } else if ( d == D_LEFT) {
     arc(x, y, 30, 30, PI+mouthAngle, PI+TWO_PI-mouthAngle); // LEFT
-  } else if ( d == 1) {
+  } else if ( d == D_RIGHT) {
     arc(x, y, 30, 30, 0+mouthAngle, TWO_PI-mouthAngle); // RIGHT
   }
 
@@ -101,30 +105,30 @@ void draw() {
   //vertex(5, 595);
   //vertex(5, 5);
   //endShape();
-  
+
   // draw the ghosts
 
   // red
   imageMode(CENTER);
   image(red_ghost, 400, 185, 35, 35);
-  
+
   // aqua
   imageMode(CENTER);
   image(aqua_ghost, 450, 185, 43, 43);
-  
+
   // orange 
   imageMode(CENTER);
   image(orange_ghost, 500, 185, 35, 35);
-  
+
   // pink
   imageMode(CENTER);
   image(pink_ghost, 550, 185, 43, 43);
-  
+
   // speed 
 
   x = x + s; // speed x 
   y = y + b; // speed y
-  
+
   // if pacman leaves the areas on map, return back into map
 
   if ( x > 1000) { // set x position to left side of screen
@@ -144,66 +148,70 @@ void draw() {
   // middle rectangle
 
   // stop the pacman if it hits edges
-  //if (x > 285 && y < 370 && y > 185 && d == 1) { //left edge
-  //  x = x - s; // pushes back out of boundry
-  //  y = y - b; // pushes back out of boundry 
-  //  s = 0;
-  //  b = 0;
-  //  println(" left edge moving right");
-  //} else if (x > 285 && y > 185 && x < 720 && d == 4) { // top edge
-  //  x = x - s;
-  //  y = y - b;
-  //  s = 0;
-  //  b = 0;
-  //  println(" top edge moving down");
-  //} else if ( x < 720 && y < 370 && y > 185 && d == 2) { // right edge
-  //  x = x - s;
-  //  y = y - b;
-  //  s = 0;
-  //  b = 0;
-  //  println(" right edge moving left ");
-  //} else if ( x > 285 && y < 370 && x < 720 && d == 3 ) { // bottom edge
-  //  x = x - s;
-  //  y = y - b;
-  //  s = 0;
-  //  b = 0;
-  //  println(" bottom edge moving up ");
-  //}
-
-
-  // top left rectangle
-
-  //if ( x < 320 && y < 150 && y > 30 && d == 1) { // left edge
-  //  x = x - s;
-  //  y = y - b;
-  //  s = 0;
-  //  b = 0;
-  //} else if ( x > 318 && y > 135 && x < 30 && d == 4) { // top edge
-  //  x = x - s;
-  //  y = y - b;
-  //  s = 0;
-  //  b = 0;
-  //} else  if ( x < 353 && y < 150 && y > 30 && d == 2) { // right edge
-  //  x = x - s;
-  //  y = y - b;
-  //  s = 0;
-  //  b = 0;
-  //} else if ( x > 318 && y < 170 && x < 30 && d == 3) { // bottom edge
-  //  x = x - s;
-  //  y = y - b;
-  //  s = 0;
-  //  b = 0;
-  //}
-
-  // top right rectangle 
-  if ( x > 667 && x < 995 && y > 30 && d == 4) { // top edge
+  if (x > 285 && x < 720 && y < 370 && y > 185 && d == D_RIGHT) { //left edge
+    x = x - s; // pushes back out of boundary
+    y = y - b; // pushes back out of boundary
+    s = 0;
+    b = 0;
+    println("x is: " + x);
+    println("y is: " + y);
+    println(" left edge moving right");
+  } else if (x > 285 && y > 185 && x < 720 && d == D_DOWN) { // top edge
     x = x - s;
     y = y - b;
     s = 0;
     b = 0;
+    println(" top edge moving down");
+  } else if ( x < 720 && y < 370 && y > 185 && d == D_LEFT) { // right edge
+    x = x + s;
+    y = y + b;
+    s = 0;
+    b = 0;
+    println(" right edge moving left ");
   }
 }
+//} else if ( x > 285 && y < 370 && x < 720 && d == 3 ) { // bottom edge
+//  x = x - s;
+//  y = y - b;
+//  s = 0;
+//  b = 0;
+//  println(" bottom edge moving up ");
+//}
 
+
+// top left rectangle
+
+//if ( x < 320 && y < 150 && y > 30 && d == 1) { // left edge
+//  x = x - s;
+//  y = y - b;
+//  s = 0;
+//  b = 0;
+//} else if ( x > 318 && y > 135 && x < 30 && d == 4) { // top edge
+//  x = x - s;
+//  y = y - b;
+//  s = 0;
+//  b = 0;
+//} else  if ( x < 353 && y < 150 && y > 30 && d == 2) { // right edge
+//  x = x - s;
+//  y = y - b;
+//  s = 0;
+//  b = 0;
+//} else if ( x > 318 && y < 170 && x < 30 && d == 3) { // bottom edge
+//  x = x - s;
+//  y = y - b;
+//  s = 0;
+//  b = 0;
+//}
+
+// top right rectangle 
+//if ( x > 667 && x < 995 && y > 30 && d == 4) { // top edge
+//  x = x - s;
+//  y = y - b;
+//  s = 0;
+//  b = 0;
+//}
+//}
+//
 
 void keyPressed() {
   // make pacman move left and right up and down
