@@ -18,8 +18,8 @@ PImage pink_ghost; // pink ghost
 void setup() {
   size(1000, 600);
   smooth();
-  x = 25; // place pacman at bottom left
-  y= 125; // place pacman on line
+  x = 150; // place pacman at bottom left
+  y = 275; // place pacman on line
   red_ghost = loadImage("ghost_red.png"); // draw the red ghost
   aqua_ghost = loadImage("ghost_aqua.png"); // draw the aqua ghost
   orange_ghost = loadImage("ghost_orange.png"); // draw the orange ghost 
@@ -166,7 +166,7 @@ void draw() {
     println("y is: " + y);
     println(" right edge moving left ");
     println("direction is: " + d);
-  } else if (x > 285 && y > 185 && x < 720 && d == D_DOWN) { // top edge
+  } else if (x > 285 && y < 370 && y > 185 && x < 720 && d == D_DOWN) { // top edge
     x = x - s;
     y = y - b;
     s = 0;
@@ -175,7 +175,7 @@ void draw() {
     println("y is: " + y);
     println(" top edge moving down");
     println("direction is: " + d);
-  } else if ( x > 285 && y < 370 && x < 720 && d == D_UP ) { // bottom edge
+  } else if ( x > 285 && y < 370 && x < 720 && y > 185 && d == D_UP ) { // bottom edge
     x = x - s;
     y = y - b;
     s = 0;
@@ -185,42 +185,79 @@ void draw() {
     println("y is: " + y);
     println("direction is: " + d);
   }
+
+
+  // top left rectangle
+
+  if ( x < 353 && x > 30 &&  y < 170 && y > 30 && d == D_RIGHT) { // left edge
+    x = x - s;
+    y = y - b;
+    s = 0;
+    b = 0;
+    println("x is: " + x);
+    println("y is: " + y);
+    println("direction is: " + d);
+  } else  if ( x < 353 && x > 30 && y < 170 && y > 30 && d == D_LEFT) { // right edge
+    x = x - s;
+    y = y - b;
+    s = 0;
+    b = 0;
+    println("x is: " + x);
+    println("y is: " + y);
+    println("direction is: " + d);
+  } else if (x < 353 && x > 30 && y > 30 && y < 170 && d == D_DOWN) { // top edge
+    x = x - s;
+    y = y - b;
+    s = 0;
+    b = 0;
+    println("x is: " + x);
+    println("y is: " + y);
+    println("direction is: " + d);
+  } else if ( x < 353 && x > 30 && y < 170 && y > 30 && d == D_UP) { // bottom edge
+    x = x - s;
+    y = y - b;
+    s = 0;
+    b = 0;
+    println("x is: " + x);
+    println("y is: " + y);
+    println("direction is: " + d);
+  }
+
+  // top right rectangle 
+  if ( x > 652 && x < 975 && y < 170 && y > 30 && d == D_RIGHT) { // left edge
+    x = x - s;
+    y = y - b;
+    s = 0;
+    b = 0;
+    println("x is: " + x);
+    println("y is: " + y);
+    println("direction is: " + d);
+  } else if ( x > 652 && x < 975 && y < 170 && y > 30 && d == D_LEFT) { // right edge
+    x = x - s;
+    y = y - b;
+    s = 0;
+    b = 0;
+    println("x is: " + x);
+    println("y is: " + y);
+    println("direction is: " + d);
+  } else if ( x > 652 && x < 975 && y < 170 && y > 30 && d == D_DOWN) { // top edge
+    x = x - s;
+    y = y - b;
+    s = 0;
+    b = 0;
+    println("x is: " + x);
+    println("y is: " + y);
+    println("direction is: " + d);
+  } else if ( x > 652 && x < 975 && y < 170 && y > 30 && d == D_UP) { // bottom edge
+    x = x - s;
+    y = y - b;
+    s = 0;
+    b = 0;
+    println("x is: " + x);
+    println("y is: " + y);
+    println("direction is: " + d);
+  }
 }
-
-
-// top left rectangle
-
-//if ( x < 320 && y < 150 && y > 30 && d == 1) { // left edge
-//  x = x - s;
-//  y = y - b;
-//  s = 0;
-//  b = 0;
-//} else if ( x > 318 && y > 135 && x < 30 && d == 4) { // top edge
-//  x = x - s;
-//  y = y - b;
-//  s = 0;
-//  b = 0;
-//} else  if ( x < 353 && y < 150 && y > 30 && d == 2) { // right edge
-//  x = x - s;
-//  y = y - b;
-//  s = 0;
-//  b = 0;
-//} else if ( x > 318 && y < 170 && x < 30 && d == 3) { // bottom edge
-//  x = x - s;
-//  y = y - b;
-//  s = 0;
-//  b = 0;
-//}
-
-// top right rectangle 
-//if ( x > 667 && x < 995 && y > 30 && d == 4) { // top edge
-//  x = x - s;
-//  y = y - b;
-//  s = 0;
-//  b = 0;
-//}
-//}
-//
 
 void keyPressed() {
   // make pacman move left and right up and down
