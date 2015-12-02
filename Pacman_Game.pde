@@ -79,7 +79,7 @@ void draw() {
   vertex(667, 150);
   endShape();
 
-  // bottome left rect
+  // bottom left rect
   beginShape();
   vertex(333, 400);
   vertex(45, 400);
@@ -257,8 +257,77 @@ void draw() {
     println("y is: " + y);
     println("direction is: " + d);
   }
-}
 
+  // bottom left rectangle
+  if ( x < 353 && x > 30 && y > 385 && y < 535 && d == D_RIGHT) { // left edge
+    x = x - s;
+    y = y - b;
+    s = 0;
+    b = 0;
+    println("x is: " + x);
+    println("y is: " + y);
+    println("direction is: " + d);
+  } else if ( x < 353 && x > 30 && y > 385 && y < 535 && d == D_LEFT) { // right edge
+    x = x - s;
+    y = y - b;
+    s = 0;
+    b = 0;
+    println("x is: " + x);
+    println("y is: " + y);
+    println("direction is: " + d);
+  } else if ( x < 353 && x > 30 && y > 385 && y < 535 && d == D_DOWN) { // top edge
+    x = x - s;
+    y = y - b;
+    s = 0;
+    b = 0;
+    println("x is: " + x);
+    println("y is: " + y);
+    println("direction is: " + d);
+  } else if ( x < 353 && x > 30 && y > 385 && y < 575 && d == D_UP) { // bottom edge
+    x = x - s;
+    y = y - b;
+    s = 0;
+    b = 0;
+    println("x is: " + x);
+    println("y is: " + y);
+    println("direction is: " + d);
+  }
+
+  // bottom right rectangle
+  if ( x > 652 && x < 975 && y > 385 && y < 575 && d == D_RIGHT) { // left edge
+    x = x - s;
+    y = y - b;
+    s = 0;
+    b = 0;
+    println("x is: " + x);
+    println("y is: " + y);
+    println("direction is: " + d);
+  } else  if ( x > 652 && x < 975 && y > 385 && y < 570 && d == D_LEFT) { // right edge
+    x = x - s;
+    y = y - b;
+    s = 0;
+    b = 0;
+    println("x is: " + x);
+    println("y is: " + y);
+    println("direction is: " + d);
+  } else  if ( x > 652 && x < 975 && y > 385 && y < 570 && d == D_DOWN) { // top edge
+    x = x - s;
+    y = y - b;
+    s = 0;
+    b = 0;
+    println("x is: " + x);
+    println("y is: " + y);
+    println("direction is: " + d);
+  } else  if ( x > 652 && x < 975 && y > 385 && y < 570 && d == D_UP) { // bottom edge
+    x = x - s;
+    y = y - b;
+    s = 0;
+    b = 0;
+    println("x is: " + x);
+    println("y is: " + y);
+    println("direction is: " + d);
+  }
+} 
 void keyPressed() {
   // make pacman move left and right up and down
   if (key == CODED) {
