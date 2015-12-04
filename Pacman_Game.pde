@@ -1,21 +1,30 @@
+// Name : Ryan Gajer
+
+// Purpose : To make Pacman for ISP and to demonstrate my knowledge of this code
+
 boolean isOpening = true; // if the mouth is opening
 float mouthAngle = 0; // angle of the mouth when it starts
 float mouthChange = TWO_PI/180; //what angle the mouth extends to
+int pacX = 30; // x size of pacman
+int pacY = 30; // y size of pacman
 int x; // tracks horizontal position of pacman
 int s; // speed of x value
 int y; // tracks vertical position of pacman
 int b; // speed of y value
 int d = 1; // direction : 1 = right, 2 = left, 3 = up, 4 = down
-final int D_RIGHT = 1; 
-final int D_LEFT = 2;
-final int D_UP = 3;
-final int D_DOWN = 4;
+final int D_RIGHT = 1; // sets the final number 1 to be direction right
+final int D_LEFT = 2; // sets the final number 1 to be direction left
+final int D_UP = 3; // sets the final number 1 to be direction up
+final int D_DOWN = 4; // sets the final number 1 to be direction down
 PImage red_ghost; // red ghost
 PImage aqua_ghost; // aqua ghost
 PImage orange_ghost; // orange ghost
 PImage pink_ghost; // pink ghost
+int food = 250;
+int hit;
 
 void setup() {
+  
   size(1000, 600);
   smooth();
   x = 150; // place pacman at bottom left
@@ -29,24 +38,25 @@ void draw() {
   noStroke();
   fill(255, 255, 0);
   if (isOpening == true) mouthAngle += mouthChange; // change the mouth if it reaches certain angle
-  else mouthAngle -= mouthChange;
+  else mouthAngle -= mouthChange; 
 
-  if (mouthAngle >= TWO_PI/10 || mouthAngle <= 0) isOpening = !isOpening;
+  if (mouthAngle >= TWO_PI/15 || mouthAngle <= 0) isOpening = !isOpening;
   //where it says two.pi and then 10, change the 10 to make the mouth open faster
   background(0);
 
   // change the way the mouth faces
   if ( d == D_DOWN) {
-    arc(x, y, 30, 30, PI/2+mouthAngle, PI/2+TWO_PI-mouthAngle); // DOWN
+    arc(x, y, pacX, pacY, PI/2+mouthAngle, PI/2+TWO_PI-mouthAngle); // DOWN
   } else if ( d == D_UP) {
-    arc(x, y, 30, 30, PI*3/2+mouthAngle, PI*3/2+TWO_PI-mouthAngle); //UP
+    arc(x, y, pacX, pacY, PI*3/2+mouthAngle, PI*3/2+TWO_PI-mouthAngle); //UP
   } else if ( d == D_LEFT) {
-    arc(x, y, 30, 30, PI+mouthAngle, PI+TWO_PI-mouthAngle); // LEFT
+    arc(x, y, pacX, pacY, PI+mouthAngle, PI+TWO_PI-mouthAngle); // LEFT
   } else if ( d == D_RIGHT) {
-    arc(x, y, 30, 30, 0+mouthAngle, TWO_PI-mouthAngle); // RIGHT
+    arc(x, y, pacX, pacY, 0+mouthAngle, TWO_PI-mouthAngle); // RIGHT
   }
 
   // draw the map
+
 
   // middle rect
   noFill();
@@ -98,13 +108,13 @@ void draw() {
   endShape();
 
   //draw the border
-  beginShape();
-  vertex(5, 5);
-  vertex(995, 5);
-  vertex(995, 595);
-  vertex(5, 595);
-  vertex(5, 5);
-  endShape();
+  //beginShape();
+  //vertex(5, 5);
+  //vertex(995, 5);
+  //vertex(995, 595);
+  //vertex(5, 595);
+  //vertex(5, 5);
+  //endShape();
 
   // draw the ghosts
 
@@ -142,6 +152,15 @@ void draw() {
   if ( y > 600) { // set y position to bottom of screen
     y = 0;
   }
+
+  // food for pacman
+  strokeWeight(5);
+  stroke(255); // white
+  fill(255);
+  ellipse( food, 275, 10, 10); // draw the pellet on the right of pacman
+  println(food);
+  
+  
 
   // hit detection 
 
@@ -327,7 +346,8 @@ void draw() {
     println("y is: " + y);
     println("direction is: " + d);
   }
-} 
+}
+
 void keyPressed() {
   // make pacman move left and right up and down
   if (key == CODED) {
