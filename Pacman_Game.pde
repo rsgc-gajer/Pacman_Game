@@ -7,9 +7,9 @@ float mouthAngle = 0; // angle of the mouth when it starts
 float mouthChange = TWO_PI/180; //what angle the mouth extends to
 int pacX = 30; // x size of pacman
 int pacY = 30; // y size of pacman
-int x; // tracks horizontal position of pacman
+float x; // tracks horizontal position of pacman
 int s; // speed of x value
-int y; // tracks vertical position of pacman
+float y; // tracks vertical position of pacman
 int b; // speed of y value
 int d = 1; // direction : 1 = right, 2 = left, 3 = up, 4 = down
 final int D_RIGHT = 1; // sets the final number 1 to be direction right
@@ -20,13 +20,16 @@ PImage red_ghost; // red ghost
 PImage aqua_ghost; // aqua ghost
 PImage orange_ghost; // orange ghost
 PImage pink_ghost; // pink ghost
-int food = 250;
+float food;
 int hit;
+float foody;
 
 void setup() {
-  
+  frameRate(60);
   size(1000, 600);
   smooth();
+  food = 250;
+  foody = 275;
   x = 150; // place pacman at bottom left
   y = 275; // place pacman on line
   red_ghost = loadImage("ghost_red.png"); // draw the red ghost
@@ -157,12 +160,19 @@ void draw() {
   strokeWeight(5);
   stroke(255); // white
   fill(255);
-  ellipse( food, 275, 10, 10); // draw the pellet on the right of pacman
+  ellipse( food, foody, 10, 10); // draw the pellet on the right of pacman
   println(food);
-  
-  
-
+  float e = (foody-y)*(foody-y);
+  float f = (food-x)*(food-x);
+  float g = sqrt(e+f);
+  if (g<15) {
+    food=-100;
+  }
   // hit detection 
+
+  text("x is: " + x, 100, 75);
+  text("y is: " + y, 100, 95);
+  text("direction is; " + d, 100, 115);
 
   // middle rectangle
 
