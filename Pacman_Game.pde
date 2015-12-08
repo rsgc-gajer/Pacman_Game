@@ -20,15 +20,15 @@ PImage red_ghost; // red ghost
 PImage aqua_ghost; // aqua ghost
 PImage orange_ghost; // orange ghost
 PImage pink_ghost; // pink ghost
-float foodx; // food X
-float foody; // food Y
+float[] foodx = new float[5]; // food X
+float[] foody = new float[5]; // food Y
 
 void setup() {
   frameRate(60);
   size(1000, 600);
   smooth();
-  foodx = 250;
-  foody = 275;
+  foodx[0] = 250;
+  foody[0] = 275;
   x = 150; // place pacman at bottom left
   y = 275; // place pacman on line
   red_ghost = loadImage("ghost_red.png"); // draw the red ghost
@@ -159,15 +159,15 @@ void draw() {
   strokeWeight(5);
   stroke(255); // white
   fill(255);
-  ellipse( foodx, foody, 10, 10); // draw the pellet on the right of pacman
-  println(foodx);
+  ellipse( foodx[0], foody[0], 10, 10); // draw the pellet on the right of pacman
+  println(foodx[0]);
   
   // if pacman hits food, get rid of it
-  float e = (foody-y)*(foody-y);
-  float f = (foodx-x)*(foodx-x);
+  float e = (foody[0]-y)*(foody[0]-y);
+  float f = (foodx[0]-x)*(foodx[0]-x);
   float g = sqrt(e+f);
   if (g<15) {
-    foodx=-100;
+    foodx[0]=-100;
   }
   // hit detection 
 
