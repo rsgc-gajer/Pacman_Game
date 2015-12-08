@@ -2,7 +2,7 @@
 
 // Purpose : To make Pacman for ISP and to demonstrate my knowledge of this code
 
-boolean isOpening = true; // if the mouth is opening
+boolean isOpening = true; // if the mouth is opening, do what it says in the code below
 float mouthAngle = 0; // angle of the mouth when it starts
 float mouthChange = TWO_PI/180; //what angle the mouth extends to
 int pacX = 30; // x size of pacman
@@ -12,23 +12,22 @@ int s; // speed of x value
 float y; // tracks vertical position of pacman
 int b; // speed of y value
 int d = 1; // direction : 1 = right, 2 = left, 3 = up, 4 = down
-final int D_RIGHT = 1; // sets the final number 1 to be direction right
-final int D_LEFT = 2; // sets the final number 1 to be direction left
-final int D_UP = 3; // sets the final number 1 to be direction up
-final int D_DOWN = 4; // sets the final number 1 to be direction down
+final int D_RIGHT = 1; // sets the final direction to be 1, which is going right
+final int D_LEFT = 2; // sets the final direction to be 2, which is going left
+final int D_UP = 3; // sets the final direction to be 3, which is going up
+final int D_DOWN = 4; // sets the final direction to be 4, which is going down
 PImage red_ghost; // red ghost
 PImage aqua_ghost; // aqua ghost
 PImage orange_ghost; // orange ghost
 PImage pink_ghost; // pink ghost
-float food;
-int hit;
-float foody;
+float foodx; // food X
+float foody; // food Y
 
 void setup() {
   frameRate(60);
   size(1000, 600);
   smooth();
-  food = 250;
+  foodx = 250;
   foody = 275;
   x = 150; // place pacman at bottom left
   y = 275; // place pacman on line
@@ -160,13 +159,15 @@ void draw() {
   strokeWeight(5);
   stroke(255); // white
   fill(255);
-  ellipse( food, foody, 10, 10); // draw the pellet on the right of pacman
-  println(food);
+  ellipse( foodx, foody, 10, 10); // draw the pellet on the right of pacman
+  println(foodx);
+  
+  // if pacman hits food, get rid of it
   float e = (foody-y)*(foody-y);
-  float f = (food-x)*(food-x);
+  float f = (foodx-x)*(foodx-x);
   float g = sqrt(e+f);
   if (g<15) {
-    food=-100;
+    foodx=-100;
   }
   // hit detection 
 
