@@ -27,8 +27,21 @@ void setup() {
   frameRate(60);
   size(1000, 600);
   smooth();
-  foodx[0] = 250;
+
+  // set the position of all the pellets
+  foodx[0] = 75;
+  foodx[1] = 150;
+  foodx[2] = 225;
+  foodx[3] = 300;
+  foodx[4] = 375;
+
   foody[0] = 275;
+  foody[1] = 275;
+  foody[2] = 275;
+  foody[3] = 275;
+  foody[4] = 275;
+
+
   x = 150; // place pacman at bottom left
   y = 275; // place pacman on line
   red_ghost = loadImage("ghost_red.png"); // draw the red ghost
@@ -156,19 +169,29 @@ void draw() {
   }
 
   // food for pacman
-  strokeWeight(5);
-  stroke(255); // white
-  fill(255);
-  ellipse( foodx[0], foody[0], 10, 10); // draw the pellet on the right of pacman
-  println(foodx[0]);
-  
-  // if pacman hits food, get rid of it
-  float e = (foody[0]-y)*(foody[0]-y);
-  float f = (foodx[0]-x)*(foodx[0]-x);
-  float g = sqrt(e+f);
-  if (g<15) {
-    foodx[0]=-100;
+  int counter = 0;
+  //                    5
+  while (counter < foodx.length) {
+    println("hey, i'm in the loop, it's iteration number: " + counter);
+
+    strokeWeight(5);
+    stroke(255); // white
+    fill(255);
+    ellipse( foodx[counter], foody[counter], 10, 10); // draw the pellet on the right of pacman
+    println(foodx[0]);
+
+    // if pacman hits food, get rid of it
+    float e = (foody[counter]-y)*(foody[counter]-y);
+    float f = (foodx[counter]-x)*(foodx[counter]-x);
+    float g = sqrt(e+f);
+    if (g<15) {
+      foodx[counter]=-100;
+    }    
+    
+    // update the loop counter
+    counter = counter + 1;
   }
+
   // hit detection 
 
   text("x is: " + x, 100, 75);
