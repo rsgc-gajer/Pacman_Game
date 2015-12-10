@@ -20,34 +20,277 @@ PImage red_ghost; // red ghost
 PImage aqua_ghost; // aqua ghost
 PImage orange_ghost; // orange ghost
 PImage pink_ghost; // pink ghost
-float[] foodx = new float[5]; // food X
-float[] foody = new float[5]; // food Y
-
+float[] foodx = new float[100]; // food X
+float[] foody = new float[100]; // food Y
+float gx1; // first ghosts x position  = aqua
+float gy1; // first ghosts y position  = aqua
+float gxs1 = 3; // x speed of first ghost  = aqua
+float gys1; // y speed of first ghost = aqua
+float gx2; // seconds ghosts x position = red
+float gy2; // seconds ghosts y position = red
+float gxs2 = 3; // second ghosts x speed = red
+float gys2; // second ghosts y speed = red
+float gx3; // third ghosts x position = pink
+float gy3; // third ghosts y position = pink
+float gxs3; // third ghosts x speed = pink
+float gys3; // third ghosts y speed = pink
 void setup() {
   frameRate(60);
   size(1000, 600);
   smooth();
+  //gx1 = gx1 + random(0, 3);
 
   // set the position of all the pellets
-  foodx[0] = 75;
-  foodx[1] = 150;
-  foodx[2] = 225;
-  foodx[3] = 300;
-  foodx[4] = 375;
 
+  // middle left 
+  foodx[0] = 25;
   foody[0] = 275;
+
+  foodx[1] = 75;
   foody[1] = 275;
+
+  foodx[2] = 125;
   foody[2] = 275;
+
+  foodx[3] = 175;
   foody[3] = 275;
+
+  foodx[4] = 225;
   foody[4] = 275;
 
+  foodx[5] = 275;
+  foody[5] = 275;
 
-  x = 150; // place pacman at bottom left
-  y = 275; // place pacman on line
-  red_ghost = loadImage("ghost_red.png"); // draw the red ghost
-  aqua_ghost = loadImage("ghost_aqua.png"); // draw the aqua ghost
-  orange_ghost = loadImage("ghost_orange.png"); // draw the orange ghost 
-  pink_ghost = loadImage("ghost_pink.png"); // draw the pink ghost
+  foodx[6] = 25; 
+  foody[6] = 325;
+
+  foodx[7] = 75;
+  foody[7] = 325;
+
+  foodx[8] = 125;
+  foody[8] = 325;
+
+  foodx[9] = 175;
+  foody[9] = 325;
+
+  foodx[10] = 225;
+  foody[10] = 325;
+
+  foodx[11] = 275;
+  foody[11] = 325;
+
+  foodx[12] = 25;
+  foody[12] = 225;
+
+  foodx[13] = 75;
+  foody[13] = 225;
+
+  foodx[14] = 125;
+  foody[14] = 225;
+
+  foodx[15] = 175;
+  foody[15] = 225;
+
+  foodx[16] = 225;
+  foody[16] = 225;
+
+  foodx[17] = 275;
+  foody[17] = 225;
+
+  // row above middle rectangle
+
+  foodx[18] = 25;
+  foody[18] = 175;
+
+  foodx[19] = 75;
+  foody[19] = 175;
+
+  foodx[20] = 125;
+  foody[20] = 175;
+
+  foodx[21] = 175;
+  foody[21] = 175;
+
+  foodx[22] = 225;
+  foody[22] = 175;
+
+  foodx[23] = 275;
+  foody[23] = 175;
+
+  foodx[24] = 325;
+  foody[24] = 175;
+
+  foodx[25] = 375;
+  foody[25] = 175;
+
+  foodx[26] = 425;
+  foody[26] = 175;
+
+  foodx[27] = 475;
+  foody[27] = 175;
+
+  foodx[28] = 525;
+  foody[28] = 175;
+
+  foodx[29] = 575;
+  foody[29] = 175;
+
+  foodx[30] = 625;
+  foody[30] = 175;
+
+  foodx[31] = 675;
+  foody[31] = 175;
+
+  foodx[32] = 725;
+  foody[32] = 175;
+
+  foodx[33] = 775;
+  foody[33] = 175;
+
+  foodx[34] = 825;
+  foody[34] = 175;
+
+  foodx[35] = 875;
+  foody[35] = 175;
+
+  foodx[36] = 925;
+  foody[36] = 175;
+
+  foodx[37] = 975;
+  foody[37] = 175;
+
+  // middle right rectangle
+
+  foodx[39] = 725;
+  foody[39] = 225;
+
+  foodx[40] = 775;
+  foody[40] = 225;
+
+  foodx[41] = 825;
+  foody[41] = 225;
+
+  foodx[42] = 875;
+  foody[42] = 225;
+
+  foodx[43] = 925;
+  foody[43] = 225;
+
+  foodx[44] = 975;
+  foody[44] = 225;
+
+  foodx[45] = 725;
+  foody[45] = 275;
+
+  foodx[46] = 775;
+  foody[46] = 275;
+
+  foodx[47] = 825;
+  foody[47] = 275;
+
+  foodx[48] = 875;
+  foody[48] = 275;
+
+  foodx[49] = 925;
+  foody[49] = 275;
+
+  foodx[50] = 975;
+  foody[50] = 275;
+
+  foodx[51] = 725;
+  foody[51] = 325;
+
+  foodx[52] = 775;
+  foody[52] = 325;
+
+  foodx[53] = 825;
+  foody[53] = 325;
+
+  foodx[54] = 875;
+  foody[54] = 325;
+
+  foodx[55] = 925;
+  foody[55] = 325;
+
+  foodx[56] = 975;
+  foody[56] = 325;
+
+  // row below middle rectangle
+
+  foodx[57] = 25;
+  foody[57] = 375;
+
+  foodx[58] = 75;
+  foody[58] = 375;
+
+  foodx[59] = 125;
+  foody[59] = 375;
+
+  foodx[60] = 175;
+  foody[60] = 375;
+
+  foodx[61] = 225;
+  foody[61] = 375;
+
+  foodx[62] = 275;
+  foody[62] = 375;
+
+  foodx[63] = 325;
+  foody[63] = 375;
+
+  foodx[64] = 375;
+  foody[64] = 375;
+
+  foodx[65] = 425;
+  foody[65] = 375;
+
+  foodx[66] = 475;
+  foody[66] = 375;
+
+  foodx[67] = 525;
+  foody[67] = 375;
+
+  foodx[68] = 575;
+  foody[68] = 375;
+
+  foodx[69] = 625;
+  foody[69] = 375;
+
+  foodx[70] = 675;
+  foody[70] = 375;
+
+  foodx[71] = 725;
+  foody[71] = 375;
+
+  foodx[72] = 775;
+  foody[72] = 375;
+
+  foodx[73] = 825;
+  foody[73] = 375;
+
+  foodx[74] = 875;
+  foody[74] = 375;
+
+  foodx[75] = 925;
+  foody[75] = 375;
+
+  foodx[76] = 975;
+  foody[76] = 375;
+
+  // load the ghosts and display pacman with coordinates x and y
+
+  x = 25; // place pacman at bottom left
+  y = 175; // place pacman on line
+  gx1 = 450; // aqua ghosts x position
+  gy1 = 185; // aqua ghosts y position
+  gx2 = 150; // red ghosts x position 
+  gy2 = 285; // red ghosts y position 
+  gx3 = 550; // pink ghosts x position
+  gy3 = 185; // pink ghosts y position 
+  red_ghost = loadImage("ghost_red.png"); // display the red ghost
+  aqua_ghost = loadImage("ghost_aqua.png"); // display the aqua ghost
+  orange_ghost = loadImage("ghost_orange.png"); // display the orange ghost 
+  pink_ghost = loadImage("ghost_pink.png"); // display the pink ghost
 }
 void draw() {
   noStroke();
@@ -72,7 +315,6 @@ void draw() {
 
   // draw the map
 
-
   // middle rect
   noFill();
   strokeWeight(3);
@@ -84,7 +326,6 @@ void draw() {
   vertex(300, 350);
   vertex(300, 200); 
   endShape();
-
 
   // top left rect
   beginShape();
@@ -135,11 +376,11 @@ void draw() {
 
   // red
   imageMode(CENTER);
-  image(red_ghost, 400, 185, 35, 35);
+  image(red_ghost, gx2, gy2, 35, 35);
 
   // aqua
   imageMode(CENTER);
-  image(aqua_ghost, 450, 185, 43, 43);
+  image(aqua_ghost, gx1, gy1, 43, 43);
 
   // orange 
   imageMode(CENTER);
@@ -147,13 +388,77 @@ void draw() {
 
   // pink
   imageMode(CENTER);
-  image(pink_ghost, 550, 185, 43, 43);
+  image(pink_ghost, gx3, gy3, 43, 43);
 
-  // speed 
+  // speed of pacman
 
   x = x + s; // speed x 
   y = y + b; // speed y
 
+  // spped of ghosts
+  gx1 = gx1 + gxs1; // aqua
+  gy1 = gy1 + gys1;
+
+  gx2 = gx2 + gxs2; // red
+  gy2 = gy2 + gys2;
+
+  // hit detection of first ghost (aqua)
+
+  if ( gx1 > 1000) {
+    int choice = int(random(0, 3)); // random chance in a 0-3 value
+    if ( choice < 1) {
+      gxs1 = -3; // go left
+      gys1 = 0;
+    } else if (choice < 2) { // go down
+      gys1 = 3;
+      gxs1 = 0;
+    } else { // go up
+      gys1 = -3;
+      gxs1 = 0;
+    }
+  }
+  if ( gx1 < 10) {
+    int choice1 = int(random(0, 3)); // random chance in a 0-3 value
+    if ( choice1 < 1) { // right
+      gxs1 = 3;
+      gys1 = 0;
+    } else if ( choice1 < 2) { // go down
+      gxs1 = 0;
+      gys1 = 3;
+    } else { // go up
+      gxs1 = 0;
+      gys1 = -3;
+    }
+  }
+
+  // hit detection of second ghost (red)
+
+  if ( gx2 > 1000) {
+    int choice2 = int(random(0, 3)); // random chance in a 0-3 value
+    if ( choice2 < 1) {
+      gxs2 = -3; // go left
+      gys2 = 0;
+    } else if (choice2 < 2) { // go down
+      gys2 = 3;
+      gxs2 = 0;
+    } else { // go up
+      gys2 = -3;
+      gxs2 = 0;
+    }
+  }
+  if ( gx2 < 10) {
+    int choice1 = int(random(0, 3)); // random chance in a 0-3 value
+    if ( choice1 < 1) { // right
+      gxs2 = 3;
+      gys2 = 0;
+    } else if ( choice1 < 2) { // go down
+      gxs2 = 0;
+      gys2 = 3;
+    } else { // go up
+      gxs2 = 0;
+      gys2 = -3;
+    }
+  }
   // if pacman leaves the areas on map, return back into map
 
   if ( x > 1000) { // set x position to left side of screen
@@ -168,16 +473,22 @@ void draw() {
     y = 0;
   }
 
+  // if pacman hits first ghosts
+  //if ( x < gx1) {
+  //  s = 0;
+  //  gxs1 = 0;
+  //}
+
   // food for pacman
   int counter = 0;
-  //                    5
+  //                    100
   while (counter < foodx.length) {
     println("hey, i'm in the loop, it's iteration number: " + counter);
 
     strokeWeight(5);
     stroke(255); // white
     fill(255);
-    ellipse( foodx[counter], foody[counter], 10, 10); // draw the pellet on the right of pacman
+    ellipse( foodx[counter], foody[counter], 5, 5); // draw the pellet on the right of pacman
     println(foodx[0]);
 
     // if pacman hits food, get rid of it
@@ -187,16 +498,28 @@ void draw() {
     if (g<15) {
       foodx[counter]=-100;
     }    
-    
+
     // update the loop counter
     counter = counter + 1;
   }
 
-  // hit detection 
+  // safezone text
+  // top
+  textSize(32); 
+  text("SAFEZONE", 425, 100);
+  fill(255);
+  //bottom
+  textSize(32);
+  text("SAFEZONE", 425, 500);
+  fill(255);
 
+  // text on screen
+  textSize(20);
   text("x is: " + x, 100, 75);
   text("y is: " + y, 100, 95);
-  text("direction is; " + d, 100, 115);
+  text("direction is: " + d, 100, 115);
+
+  // hit detection 
 
   // middle rectangle
 
@@ -382,32 +705,30 @@ void draw() {
   }
 }
 
+
+
 void keyPressed() {
   // make pacman move left and right up and down
   if (key == CODED) {
     if (keyCode == LEFT) {
-      s = - 4; // speed
+      s = - 3; // speed
       b = 0; 
       d = 2;
     } 
     if (keyCode == RIGHT) {
-      s = 4; 
+      s = 3; 
       b = 0;
       d = 1;
     }
     if (keyCode == UP) {
-      b = - 4; // speed
+      b = - 3; // speed
       s = 0;
       d = 3;
     }
     if (keyCode == DOWN) {
-      b = 4;
+      b = 3;
       s = 0;
       d = 4;
     }
-  }
-  if (keyCode == ' ') {
-    b = 0;
-    s = 0;
   }
 }
