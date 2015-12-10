@@ -38,8 +38,13 @@ float gx4; // fourth ghosts x position = yellow
 float gy4; // fourth ghosts y position = yellow
 float gxs4 = 3; // fourth ghosts x speed = yellow
 float gys4; // fourth ghosts y speed = yellow
-int score = 0;
-int highscore; 
+int score = 0; // sets starting score to 0
+int highscore; // sets highscore per session
+int mouseClicked; // restarts game if mouse is clicked 
+int counter = 0; // starts the counter for food at 0
+float e; 
+float f;
+float g;
 void setup() {
   frameRate(60);
   size(1000, 600);
@@ -545,7 +550,7 @@ void draw() {
     y = 0;
   }
   // if pacman hits the ghosts, end the game
-    if(dist(x,y,gx1,gy1)<=15) {
+  if (dist(x, y, gx1, gy1)<=25) {
     textSize(80);
     noLoop();
     background(255);
@@ -555,9 +560,10 @@ void draw() {
     text("Game Over!", 500, 250);
     fill(0);
     text("Click to Restart", 500, 350);
-    textSize(12);
-    text("highscore: " + highscore, 715, 20);
-    } else  if(dist(x,y,gx2,gy2)<=15) { 
+    textSize(35);
+    text("highscore: " + highscore, 400, 450);
+    text("score: " + score, 600, 450);
+  } else  if (dist(x, y, gx2, gy2)<=25) { 
     textSize(80);
     noLoop();
     background(255);
@@ -567,10 +573,11 @@ void draw() {
     text("Game Over!", 500, 250);
     fill(0);
     text("Click to Restart", 500, 350);
-    textSize(12);
-    text("highscore: " + highscore, 715, 20);
-  } else  if(dist(x,y,gx3,gy3)<=15) { 
-   textSize(80);
+    textSize(35);
+    text("highscore: " + highscore, 400, 450);
+    text("score: " + score, 600, 450);
+  } else  if (dist(x, y, gx3, gy3)<=25) { 
+    textSize(80);
     noLoop();
     background(255);
     textAlign(CENTER);
@@ -579,10 +586,11 @@ void draw() {
     text("Game Over!", 500, 250);
     fill(0);
     text("Click to Restart", 500, 350);
-    textSize(12);
-    text("highscore: " + highscore, 715, 20);
-  } else  if(dist(x,y,gx4,gy4)<=15) { 
-   textSize(80);
+    textSize(35);
+    text("highscore: " + highscore, 400, 450);
+    text("score: " + score, 600, 450);
+  } else  if (dist(x, y, gx4, gy4)<=25) { 
+    textSize(80);
     noLoop();
     background(255);
     textAlign(CENTER);
@@ -591,12 +599,13 @@ void draw() {
     text("Game Over!", 500, 250);
     fill(0);
     text("Click to Restart", 500, 350);
-    textSize(12);
-    text("highscore: " + highscore, 715, 20);
+    textSize(35);
+    text("highscore: " + highscore, 400, 450);
+    text("score: " + score, 600, 450);
   }
 
   // food for pacman
-  int counter = 0;
+  counter = 0;
   //                    76
   while (counter < foodx.length) {
     println("hey, i'm in the loop, it's iteration number: " + counter);
@@ -608,12 +617,13 @@ void draw() {
     println(foodx[0]);
 
     // if pacman hits food, get rid of it
-    float e = (foody[counter]-y)*(foody[counter]-y);
-    float f = (foodx[counter]-x)*(foodx[counter]-x);
-    float g = sqrt(e+f);
+    e = (foody[counter]-y)*(foody[counter]-y);
+    f = (foodx[counter]-x)*(foodx[counter]-x);
+    g = sqrt(e+f);
     if (g<15) {
       foodx[counter]=-100;
-      score++;
+      score++; // increase score by 1 everytime pacman eats a piece of food
+      highscore = max(score, highscore); // sets highscore
     }    
 
     // update the loop counter
@@ -629,7 +639,7 @@ void draw() {
   textSize(32);
   text("SAFEZONE", 425, 500);
   fill(255);
-  
+
   // score
   textSize(30);
   text("score:" + score, 750, 95); 
@@ -826,7 +836,501 @@ void draw() {
   }
 }
 
+void mouseClicked() {
+  mouseClicked++;
+  if ( mouseClicked==1) {
+    score = 0;
+    x = 500; // place pacman at bottom left
+    y = 125; // place pacman on line
+    gx1 = 450; // aqua ghosts x position
+    gy1 = 185; // aqua ghosts y position
+    gx2 = 150; // red ghosts x position 
+    gy2 = 285; // red ghosts y position 
+    gx3 = 550; // pink ghosts x position
+    gy3 = 375; // pink ghosts y position 
+    gx4 = 300; // yellow ghosts x position
+    gy4 = 230; // yellow ghosts y position
 
+    foodx[1] = 75;
+    foody[1] = 275;
+
+    foodx[2] = 125;
+    foody[2] = 275;
+
+    foodx[3] = 175;
+    foody[3] = 275;
+
+    foodx[4] = 225;
+    foody[4] = 275;
+
+    foodx[5] = 275;
+    foody[5] = 275;
+
+    foodx[6] = 25; 
+    foody[6] = 325;
+
+    foodx[7] = 75;
+    foody[7] = 325;
+
+    foodx[8] = 125;
+    foody[8] = 325;
+
+    foodx[9] = 175;
+    foody[9] = 325;
+
+    foodx[10] = 225;
+    foody[10] = 325;
+
+    foodx[11] = 275;
+    foody[11] = 325;
+
+    foodx[12] = 25;
+    foody[12] = 225;
+
+    foodx[13] = 75;
+    foody[13] = 225;
+
+    foodx[14] = 125;
+    foody[14] = 225;
+
+    foodx[15] = 175;
+    foody[15] = 225;
+
+    foodx[16] = 225;
+    foody[16] = 225;
+
+    foodx[17] = 275;
+    foody[17] = 225;
+
+    // row above middle rectangle
+
+    foodx[18] = 25;
+    foody[18] = 175;
+
+    foodx[19] = 75;
+    foody[19] = 175;
+
+    foodx[20] = 125;
+    foody[20] = 175;
+
+    foodx[21] = 175;
+    foody[21] = 175;
+
+    foodx[22] = 225;
+    foody[22] = 175;
+
+    foodx[23] = 275;
+    foody[23] = 175;
+
+    foodx[24] = 325;
+    foody[24] = 175;
+
+    foodx[25] = 375;
+    foody[25] = 175;
+
+    foodx[26] = 425;
+    foody[26] = 175;
+
+    foodx[27] = 475;
+    foody[27] = 175;
+
+    foodx[28] = 525;
+    foody[28] = 175;
+
+    foodx[29] = 575;
+    foody[29] = 175;
+
+    foodx[30] = 625;
+    foody[30] = 175;
+
+    foodx[31] = 675;
+    foody[31] = 175;
+
+    foodx[32] = 725;
+    foody[32] = 175;
+
+    foodx[33] = 775;
+    foody[33] = 175;
+
+    foodx[34] = 825;
+    foody[34] = 175;
+
+    foodx[35] = 875;
+    foody[35] = 175;
+
+    foodx[36] = 925;
+    foody[36] = 175;
+
+    foodx[37] = 975;
+    foody[37] = 175;
+
+    // middle right rectangle
+
+    foodx[39] = 725;
+    foody[39] = 225;
+
+    foodx[40] = 775;
+    foody[40] = 225;
+
+    foodx[41] = 825;
+    foody[41] = 225;
+
+    foodx[42] = 875;
+    foody[42] = 225;
+
+    foodx[43] = 925;
+    foody[43] = 225;
+
+    foodx[44] = 975;
+    foody[44] = 225;
+
+    foodx[45] = 725;
+    foody[45] = 275;
+
+    foodx[46] = 775;
+    foody[46] = 275;
+
+    foodx[47] = 825;
+    foody[47] = 275;
+
+    foodx[48] = 875;
+    foody[48] = 275;
+
+    foodx[49] = 925;
+    foody[49] = 275;
+
+    foodx[50] = 975;
+    foody[50] = 275;
+
+    foodx[51] = 725;
+    foody[51] = 325;
+
+    foodx[52] = 775;
+    foody[52] = 325;
+
+    foodx[53] = 825;
+    foody[53] = 325;
+
+    foodx[54] = 875;
+    foody[54] = 325;
+
+    foodx[55] = 925;
+    foody[55] = 325;
+
+    foodx[56] = 975;
+    foody[56] = 325;
+
+    // row below middle rectangle
+
+    foodx[57] = 25;
+    foody[57] = 375;
+
+    foodx[58] = 75;
+    foody[58] = 375;
+
+    foodx[59] = 125;
+    foody[59] = 375;
+
+    foodx[60] = 175;
+    foody[60] = 375;
+
+    foodx[61] = 225;
+    foody[61] = 375;
+
+    foodx[62] = 275;
+    foody[62] = 375;
+
+    foodx[63] = 325;
+    foody[63] = 375;
+
+    foodx[64] = 375;
+    foody[64] = 375;
+
+    foodx[65] = 425;
+    foody[65] = 375;
+
+    foodx[66] = 475;
+    foody[66] = 375;
+
+    foodx[67] = 525;
+    foody[67] = 375;
+
+    foodx[68] = 575;
+    foody[68] = 375;
+
+    foodx[69] = 625;
+    foody[69] = 375;
+
+    foodx[70] = 675;
+    foody[70] = 375;
+
+    foodx[71] = 725;
+    foody[71] = 375;
+
+    foodx[72] = 775;
+    foody[72] = 375;
+
+    foodx[73] = 825;
+    foody[73] = 375;
+
+    foodx[74] = 875;
+    foody[74] = 375;
+
+    foodx[75] = 925;
+    foody[75] = 375;
+
+    foodx[76] = 975;
+    foody[76] = 375;
+    loop();
+  } else if ( mouseClicked>1) {
+    score = 0;
+    x = 500; // place pacman at bottom left
+    y = 125; // place pacman on line
+    gx1 = 450; // aqua ghosts x position
+    gy1 = 185; // aqua ghosts y position
+    gx2 = 150; // red ghosts x position 
+    gy2 = 285; // red ghosts y position 
+    gx3 = 550; // pink ghosts x position
+    gy3 = 375; // pink ghosts y position 
+    gx4 = 300; // yellow ghosts x position
+    gy4 = 230; // yellow ghosts y position
+
+    foodx[0] = 25;
+    foody[0] = 275;
+
+    foodx[1] = 75;
+    foody[1] = 275;
+
+    foodx[2] = 125;
+    foody[2] = 275;
+
+    foodx[3] = 175;
+    foody[3] = 275;
+
+    foodx[4] = 225;
+    foody[4] = 275;
+
+    foodx[5] = 275;
+    foody[5] = 275;
+
+    foodx[6] = 25; 
+    foody[6] = 325;
+
+    foodx[7] = 75;
+    foody[7] = 325;
+
+    foodx[8] = 125;
+    foody[8] = 325;
+
+    foodx[9] = 175;
+    foody[9] = 325;
+
+    foodx[10] = 225;
+    foody[10] = 325;
+
+    foodx[11] = 275;
+    foody[11] = 325;
+
+    foodx[12] = 25;
+    foody[12] = 225;
+
+    foodx[13] = 75;
+    foody[13] = 225;
+
+    foodx[14] = 125;
+    foody[14] = 225;
+
+    foodx[15] = 175;
+    foody[15] = 225;
+
+    foodx[16] = 225;
+    foody[16] = 225;
+
+    foodx[17] = 275;
+    foody[17] = 225;
+
+    // row above middle rectangle
+
+    foodx[18] = 25;
+    foody[18] = 175;
+
+    foodx[19] = 75;
+    foody[19] = 175;
+
+    foodx[20] = 125;
+    foody[20] = 175;
+
+    foodx[21] = 175;
+    foody[21] = 175;
+
+    foodx[22] = 225;
+    foody[22] = 175;
+
+    foodx[23] = 275;
+    foody[23] = 175;
+
+    foodx[24] = 325;
+    foody[24] = 175;
+
+    foodx[25] = 375;
+    foody[25] = 175;
+
+    foodx[26] = 425;
+    foody[26] = 175;
+
+    foodx[27] = 475;
+    foody[27] = 175;
+
+    foodx[28] = 525;
+    foody[28] = 175;
+
+    foodx[29] = 575;
+    foody[29] = 175;
+
+    foodx[30] = 625;
+    foody[30] = 175;
+
+    foodx[31] = 675;
+    foody[31] = 175;
+
+    foodx[32] = 725;
+    foody[32] = 175;
+
+    foodx[33] = 775;
+    foody[33] = 175;
+
+    foodx[34] = 825;
+    foody[34] = 175;
+
+    foodx[35] = 875;
+    foody[35] = 175;
+
+    foodx[36] = 925;
+    foody[36] = 175;
+
+    foodx[37] = 975;
+    foody[37] = 175;
+
+    // middle right rectangle
+
+    foodx[39] = 725;
+    foody[39] = 225;
+
+    foodx[40] = 775;
+    foody[40] = 225;
+
+    foodx[41] = 825;
+    foody[41] = 225;
+
+    foodx[42] = 875;
+    foody[42] = 225;
+
+    foodx[43] = 925;
+    foody[43] = 225;
+
+    foodx[44] = 975;
+    foody[44] = 225;
+
+    foodx[45] = 725;
+    foody[45] = 275;
+
+    foodx[46] = 775;
+    foody[46] = 275;
+
+    foodx[47] = 825;
+    foody[47] = 275;
+
+    foodx[48] = 875;
+    foody[48] = 275;
+
+    foodx[49] = 925;
+    foody[49] = 275;
+
+    foodx[50] = 975;
+    foody[50] = 275;
+
+    foodx[51] = 725;
+    foody[51] = 325;
+
+    foodx[52] = 775;
+    foody[52] = 325;
+
+    foodx[53] = 825;
+    foody[53] = 325;
+
+    foodx[54] = 875;
+    foody[54] = 325;
+
+    foodx[55] = 925;
+    foody[55] = 325;
+
+    foodx[56] = 975;
+    foody[56] = 325;
+
+    // row below middle rectangle
+
+    foodx[57] = 25;
+    foody[57] = 375;
+
+    foodx[58] = 75;
+    foody[58] = 375;
+
+    foodx[59] = 125;
+    foody[59] = 375;
+
+    foodx[60] = 175;
+    foody[60] = 375;
+
+    foodx[61] = 225;
+    foody[61] = 375;
+
+    foodx[62] = 275;
+    foody[62] = 375;
+
+    foodx[63] = 325;
+    foody[63] = 375;
+
+    foodx[64] = 375;
+    foody[64] = 375;
+
+    foodx[65] = 425;
+    foody[65] = 375;
+
+    foodx[66] = 475;
+    foody[66] = 375;
+
+    foodx[67] = 525;
+    foody[67] = 375;
+
+    foodx[68] = 575;
+    foody[68] = 375;
+
+    foodx[69] = 625;
+    foody[69] = 375;
+
+    foodx[70] = 675;
+    foody[70] = 375;
+
+    foodx[71] = 725;
+    foody[71] = 375;
+
+    foodx[72] = 775;
+    foody[72] = 375;
+
+    foodx[73] = 825;
+    foody[73] = 375;
+
+    foodx[74] = 875;
+    foody[74] = 375;
+
+    foodx[75] = 925;
+    foody[75] = 375;
+
+    foodx[76] = 975;
+    foody[76] = 375;
+    loop(); // makes the end screen restart the game
+  }
+}
 
 void keyPressed() {
   // make pacman move left and right up and down
