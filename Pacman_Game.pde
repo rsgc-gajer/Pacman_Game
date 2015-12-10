@@ -32,8 +32,13 @@ float gxs2 = 3; // second ghosts x speed = red
 float gys2; // second ghosts y speed = red
 float gx3; // third ghosts x position = pink
 float gy3; // third ghosts y position = pink
-float gxs3; // third ghosts x speed = pink
+float gxs3 = 3; // third ghosts x speed = pink
 float gys3; // third ghosts y speed = pink
+float gx4; // fourth ghosts x position = yellow
+float gy4; // fourth ghosts y position = yellow
+float gxs4 = 3; // fourth ghosts x speed = yellow
+float gys4; // fourth ghosts y speed = yellow
+
 void setup() {
   frameRate(60);
   size(1000, 600);
@@ -286,7 +291,9 @@ void setup() {
   gx2 = 150; // red ghosts x position 
   gy2 = 285; // red ghosts y position 
   gx3 = 550; // pink ghosts x position
-  gy3 = 185; // pink ghosts y position 
+  gy3 = 375; // pink ghosts y position 
+  gx4 = 300; // yellow ghosts x position
+  gy4  = 230; // yellow ghosts y position
   red_ghost = loadImage("ghost_red.png"); // display the red ghost
   aqua_ghost = loadImage("ghost_aqua.png"); // display the aqua ghost
   orange_ghost = loadImage("ghost_orange.png"); // display the orange ghost 
@@ -384,7 +391,7 @@ void draw() {
 
   // orange 
   imageMode(CENTER);
-  image(orange_ghost, 500, 185, 35, 35);
+  image(orange_ghost, gx4, gy4, 35, 35);
 
   // pink
   imageMode(CENTER);
@@ -401,6 +408,12 @@ void draw() {
 
   gx2 = gx2 + gxs2; // red
   gy2 = gy2 + gys2;
+
+  gx3 = gx3 + gxs3; // pink
+  gy3 = gy3 + gys3;
+
+  gx4 = gx4 + gxs4; // yellow
+  gy4 = gy4 + gys4;
 
   // hit detection of first ghost (aqua)
 
@@ -457,6 +470,64 @@ void draw() {
     } else { // go up
       gxs2 = 0;
       gys2 = -3;
+    }
+  }
+
+  // hit detection of second ghost (pink)
+
+  if ( gx3> 1000) {
+    int choice3 = int(random(0, 3)); // random chance in a 0-3 value
+    if ( choice3 < 1) {
+      gxs3 = -3; // go left
+      gys3 = 0;
+    } else if (choice3 < 2) { // go down
+      gys3 = 3;
+      gxs3 = 0;
+    } else { // go up
+      gys3 = -3;
+      gxs3 = 0;
+    }
+  }
+  if ( gx3 < 10) {
+    int choice3 = int(random(0, 3)); // random chance in a 0-3 value
+    if ( choice3 < 1) { // right
+      gxs3 = 3;
+      gys3 = 0;
+    } else if ( choice3 < 2) { // go down
+      gxs3 = 0;
+      gys3 = 3;
+    } else { // go up
+      gxs3 = 0;
+      gys3 = -3;
+    }
+  }
+
+  // hit detection of second ghost (yellow)
+
+  if ( gx4> 1000) {
+    int choice4 = int(random(0, 3)); // random chance in a 0-3 value
+    if ( choice4 < 1) {
+      gxs4 = -3; // go left
+      gys4 = 0;
+    } else if (choice4 < 2) { // go down
+      gys4 = 3;
+      gxs4 = 0;
+    } else { // go up
+      gys4 = -3;
+      gxs4 = 0;
+    }
+  }
+  if ( gx4 < 10) {
+    int choice4 = int(random(0, 3)); // random chance in a 0-3 value
+    if ( choice4 < 1) { // right
+      gxs4 = 3;
+      gys4 = 0;
+    } else if ( choice4 < 2) { // go down
+      gxs4 = 0;
+      gys4 = 3;
+    } else { // go up
+      gxs4 = 0;
+      gys4 = -3;
     }
   }
   // if pacman leaves the areas on map, return back into map
