@@ -38,7 +38,8 @@ float gx4; // fourth ghosts x position = yellow
 float gy4; // fourth ghosts y position = yellow
 float gxs4 = 3; // fourth ghosts x speed = yellow
 float gys4; // fourth ghosts y speed = yellow
-
+int score = 0;
+int highscore; 
 void setup() {
   frameRate(60);
   size(1000, 600);
@@ -284,8 +285,8 @@ void setup() {
 
   // load the ghosts and display pacman with coordinates x and y
 
-  x = 25; // place pacman at bottom left
-  y = 175; // place pacman on line
+  x = 500; // place pacman at bottom left
+  y = 125; // place pacman on line
   gx1 = 450; // aqua ghosts x position
   gy1 = 185; // aqua ghosts y position
   gx2 = 150; // red ghosts x position 
@@ -543,16 +544,60 @@ void draw() {
   if ( y > 600) { // set y position to bottom of screen
     y = 0;
   }
-
-  // if pacman hits first ghosts
-  //if ( x < gx1) {
-  //  s = 0;
-  //  gxs1 = 0;
-  //}
+  // if pacman hits the ghosts, end the game
+    if(dist(x,y,gx1,gy1)<=15) {
+    textSize(80);
+    noLoop();
+    background(255);
+    textAlign(CENTER);
+    textSize(60);
+    fill(0);
+    text("Game Over!", 500, 250);
+    fill(0);
+    text("Click to Restart", 500, 350);
+    textSize(12);
+    text("highscore: " + highscore, 715, 20);
+    } else  if(dist(x,y,gx2,gy2)<=15) { 
+    textSize(80);
+    noLoop();
+    background(255);
+    textAlign(CENTER);
+    textSize(60);
+    fill(0);
+    text("Game Over!", 500, 250);
+    fill(0);
+    text("Click to Restart", 500, 350);
+    textSize(12);
+    text("highscore: " + highscore, 715, 20);
+  } else  if(dist(x,y,gx3,gy3)<=15) { 
+   textSize(80);
+    noLoop();
+    background(255);
+    textAlign(CENTER);
+    textSize(60);
+    fill(0);
+    text("Game Over!", 500, 250);
+    fill(0);
+    text("Click to Restart", 500, 350);
+    textSize(12);
+    text("highscore: " + highscore, 715, 20);
+  } else  if(dist(x,y,gx4,gy4)<=15) { 
+   textSize(80);
+    noLoop();
+    background(255);
+    textAlign(CENTER);
+    textSize(60);
+    fill(0);
+    text("Game Over!", 500, 250);
+    fill(0);
+    text("Click to Restart", 500, 350);
+    textSize(12);
+    text("highscore: " + highscore, 715, 20);
+  }
 
   // food for pacman
   int counter = 0;
-  //                    100
+  //                    76
   while (counter < foodx.length) {
     println("hey, i'm in the loop, it's iteration number: " + counter);
 
@@ -568,6 +613,7 @@ void draw() {
     float g = sqrt(e+f);
     if (g<15) {
       foodx[counter]=-100;
+      score++;
     }    
 
     // update the loop counter
@@ -583,8 +629,12 @@ void draw() {
   textSize(32);
   text("SAFEZONE", 425, 500);
   fill(255);
+  
+  // score
+  textSize(30);
+  text("score:" + score, 750, 95); 
 
-  // text on screen
+  // text on screen x, y, direction
   textSize(20);
   text("x is: " + x, 100, 75);
   text("y is: " + y, 100, 95);
